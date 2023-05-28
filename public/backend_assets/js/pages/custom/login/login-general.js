@@ -54,15 +54,6 @@ var KTLogin = function() {
 
             validation.validate().then(function(status) {
 		        if (status == 'Valid') {
-					$.ajax({
-						type: "POST",
-						url: "{{ route('register') }}",
-						data: "data",
-						dataType: "dataType",
-						success: function (response) {
-							
-						}
-					});
                     swal.fire({
 		                text: "All is cool! Now you submit this form",
 		                icon: "success",
@@ -167,13 +158,8 @@ var KTLogin = function() {
         $('#kt_login_signup_submit').on('click', function (e) {
             e.preventDefault();
 
-			let name = document.getElementById('fullname').value;
-			let email = document.getElementById('email').value;
-			let password = document.getElementById('password').value;
-			let cpassword = document.getElementById('cpassword').value;
-
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {					
+		        if (status == 'Valid') {
                     swal.fire({
 		                text: "All is cool! Now you submit this form",
 		                icon: "success",

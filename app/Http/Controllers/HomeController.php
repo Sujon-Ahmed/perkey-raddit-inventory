@@ -26,14 +26,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-
-    public function store(Request $request)
-    {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-    }
 }
