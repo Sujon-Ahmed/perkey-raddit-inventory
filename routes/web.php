@@ -28,4 +28,9 @@ Route::prefix('admin')->group(function () {
     // product category
     Route::get('/product/category', [ProductCategoryController::class, 'index'])->name('product.category');
     Route::post('/product/category/store', [ProductCategoryController::class, 'store'])->name('product.category.store');
+    Route::get('/product/category/status/{id}', [ProductCategoryController::class, 'status'])->name('product.category.status');
+    Route::get('/product/category/edit/{id}', [ProductCategoryController::class, 'edit'])->name('product.category.edit');
+    Route::post('/product/category/update/{id}', [ProductCategoryController::class, 'update'])->name('product.category.update');
+    Route::get('/product/category/delete/{id}', [ProductCategoryController::class, 'delete'])->name('product.category.delete');
+
 });

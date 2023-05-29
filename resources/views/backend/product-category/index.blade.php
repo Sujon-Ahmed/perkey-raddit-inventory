@@ -31,16 +31,70 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
-                                        @if ($category->status == 1)
-                                            <span class="badge badge-success">Active</span>
+                                        @if ($category->status == 0)
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('product.category.status', encrypt($category->id)) }}"
+                                                    class="menu-link px-3"><span
+                                                        class="badge badge-warning">Deactive</span></a>
+                                            </div>
                                         @else
-                                            <span class="badge badge-warning">Deactive</span>
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('product.category.status', encrypt($category->id)) }}"
+                                                    class="menu-link px-3"><span
+                                                        class="badge badge-success">Active</span></a>
+                                            </div>
                                         @endif
                                     </td>
                                     <td>{{ date('d M, Y', strtotime($category->created_at)) }}</td>
                                     <td>
-                                        <a href="#" class="mx-2"><i class="fa fa-edit text-primary"></i></a>
-                                        <a href="#" class="mx-2"><i class="fa fa-trash-alt text-danger"></i></a>
+                                        <a data-toggle="modal" data-target="#exampleModal_{{ $category->id }}"
+                                            href="{{ route('product.category.edit', encrypt($category->id)) }}" class="mx-2"><i
+                                                class="fa fa-edit text-primary"></i></a>
+
+                                        <!-- Modal-->
+                                        <div class="modal fade" id="exampleModal_{{ $category->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Update Product
+                                                            Category</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form
+                                                            action="{{ route('product.category.update', encrypt($category->id)) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label>Product Category Name
+                                                                    <span class="text-danger">*</span></label>
+                                                                <input type="text"
+                                                                    class="form-control @error('name')
+                                                                        is-invalid
+                                                                    @enderror"
+                                                                    name="name" value="{{ $category->name }}" />
+                                                                @error('name')
+                                                                    <span class="form-text text-danger">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="flex-end-grid d-md-flex justify-content-md-end">
+                                                                <button type="submit"
+                                                                    class="btn btn-success mr-2">Update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a onclick="confirm('Are You Sure?')"
+                                            href="{{ route('product.category.delete', encrypt($category->id)) }}"
+                                            class="mx-2"><i class="fa fa-trash-alt text-danger"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
