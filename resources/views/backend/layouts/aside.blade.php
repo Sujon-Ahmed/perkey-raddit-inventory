@@ -16,7 +16,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">{{ __('messages.dashboard') }}</span>
                 </a>
             </li>							
             <li class="menu-item menu-item-{{ Route::currentRouteName() == 'product.category' ? 'active' : '' }}" aria-haspopup="true">
@@ -32,7 +32,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">Product Category</span>
+                    <span class="menu-text">{{ __('messages.product-category') }}</span>
                 </a>
             </li>							
         </ul>

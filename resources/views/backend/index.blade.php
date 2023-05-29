@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('subheading', 'Dashboard')
+@section('subheading', __('messages.dashboard'))
 @section('content')
-    <h4>Index Page</h4>
+    <h4>{{ __('messages.welcome') }}</h4>
 @endsection

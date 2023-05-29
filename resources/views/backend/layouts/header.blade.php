@@ -8,81 +8,71 @@
         <!--begin::Topbar-->
         <div class="topbar">
             <!--begin::Languages-->
-            {{-- <div class="dropdown">
+            <div class="dropdown">
                 <!--begin::Toggle-->
-                <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
-                    <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-                        <img class="h-20px w-20px rounded-sm" src="assets/media/svg/flags/226-united-states.svg"
-                            alt="" />
-                    </div>
+                <div class="topbar-item" data-bs-toggle="dropdown" data-offset="10px,0px">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (Config::get('languages')[App::getLocale()]['display'] == 'English')
+                                <img src="{{ asset('backend_assets/media/flags/en.png') }}" alt="English">
+                            @else
+                                <img src="{{ asset('backend_assets/media/flags/bd.png') }}" alt="English">
+                            @endif
+                            {{ Config::get('languages')[App::getLocale()]['display'] }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
+                                        @if ($language['flag-icon'] == 'us')
+                                            <img src="{{ asset('backend_assets/media/flags/en.png') }}"
+                                                class="
+                                            img-fluid" style="padding: 4px"
+                                                alt="English">
+                                        @else
+                                            <img src="{{ asset('backend_assets/media/flags/bd.png') }}"
+                                                class="
+                                            img-fluid" style="padding: 4px"
+                                                alt="Bangla">
+                                        @endif
+                                        {{ $language['display'] }}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </li>
                 </div>
                 <!--end::Toggle-->
                 <!--begin::Dropdown-->
-                <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
+                {{-- <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                     <!--begin::Nav-->
                     <ul class="navi navi-hover py-4">
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="assets/media/svg/flags/226-united-states.svg" alt="" />
-                                </span>
-                                <span class="navi-text">English</span>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Config::get('languages')[App::getLocale()] }}
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                        <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                @endif
+                            @endforeach
+                            </div>
                         </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="navi-item active">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="assets/media/svg/flags/128-spain.svg" alt="" />
-                                </span>
-                                <span class="navi-text">Spanish</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="assets/media/svg/flags/162-germany.svg" alt="" />
-                                </span>
-                                <span class="navi-text">German</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="assets/media/svg/flags/063-japan.svg" alt="" />
-                                </span>
-                                <span class="navi-text">Japanese</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="assets/media/svg/flags/195-france.svg" alt="" />
-                                </span>
-                                <span class="navi-text">French</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
                     </ul>
                     <!--end::Nav-->
-                </div>
+                </div> --}}
                 <!--end::Dropdown-->
-            </div> --}}
+            </div>
             <!--end::Languages-->
             <!--begin::User-->
             <div class="topbar-item">
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
                     id="kt_quick_user_toggle">
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $user->name }}</span>
+                    <span
+                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $user->name }}</span>
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                         <span class="symbol-label font-size-h5 font-weight-bold">{{ $user->name[0] }}</span>
                     </span>

@@ -1,14 +1,13 @@
 @extends('backend.layouts.master')
 @section('title', 'Product Category')
-@section('subheading', 'Product Category')
+@section('subheading', __('messages.product-category'))
 @section('content')
     <div class="row">
         <div class="col-lg-7 col-md-7 col-12 mt-2">
             <div class="card card-custom">
                 <div class="card-header flex-wrap">
                     <div class="card-title">
-                        <h3 class="card-label">Product Categories
-                        </h3>
+                        <h3 class="card-label">{{ __('messages.product-category') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -108,7 +107,7 @@
             <div class="card card-custom">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Create Product Categories</h3>
+                        <h3 class="card-label">{{ __('messages.create-new-category') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -118,7 +117,7 @@
                             <form action="{{ route('product.category.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Product Category Name
+                                    <label>{{ __('messages.product-category-name') }}
                                         <span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control @error('name')

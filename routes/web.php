@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::prefix('admin')->group(function () {
+    Route::get('/lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
     // product category
@@ -32,5 +35,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/category/edit/{id}', [ProductCategoryController::class, 'edit'])->name('product.category.edit');
     Route::post('/product/category/update/{id}', [ProductCategoryController::class, 'update'])->name('product.category.update');
     Route::get('/product/category/delete/{id}', [ProductCategoryController::class, 'delete'])->name('product.category.delete');
-
 });
