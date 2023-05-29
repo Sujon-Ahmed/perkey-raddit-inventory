@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('backend.layouts.master', [
+        return view('backend.index', [
             'user' => $user,
         ]);
     }

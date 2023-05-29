@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,4 +24,8 @@ Auth::routes();
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+
+    // product category
+    Route::get('/product/category', [ProductCategoryController::class, 'index'])->name('product.category');
+    Route::post('/product/category/store', [ProductCategoryController::class, 'store'])->name('product.category.store');
 });

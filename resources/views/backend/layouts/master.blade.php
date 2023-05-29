@@ -5,7 +5,7 @@
 <head>
     <base href="">
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>@yield('title', 'Dashboard')</title>
     <meta name="description"
         content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -136,7 +136,8 @@
                     <!--begin::Entry-->
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
-                        <div class="container">
+                        <div class="container-fluid">
+                            @yield('content')
                             <!--begin::Dashboard-->
                             <!--begin::Row-->
                             {{-- <div class="row">
