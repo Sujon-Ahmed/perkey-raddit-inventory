@@ -5,6 +5,9 @@
 <head>
     <base href="">
     <meta charset="utf-8" />
+     <!-- CSRF Token -->
+     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title', 'Dashboard')</title>
     <meta name="description"
         content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
@@ -140,7 +143,7 @@
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
                         <div class="container-fluid">
-                            @yield('content')                           
+                            @yield('content')
                         </div>
                         <!--end::Container-->
                     </div>

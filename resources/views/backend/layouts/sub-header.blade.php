@@ -14,8 +14,7 @@
                 data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
                 <span class="text-muted font-size-base font-weight-bold mr-2"
                     id="kt_dashboard_daterangepicker_title">Today</span>
-                <span class="text-primary font-size-base font-weight-bolder" id="kt_dashboard_daterangepicker_date">Aug
-                    16</span>
+                <span class="text-primary font-size-base font-weight-bolder" id="kt_dashboard_daterangepicker_date"></span>
             </a>
             <!--end::Daterange-->
         </div>

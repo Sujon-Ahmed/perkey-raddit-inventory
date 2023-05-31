@@ -12,33 +12,36 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         $user = Auth::user();
-        $products = Product::orderBy('created_at','DESC')->get();
-        $categories = ProductCategory::where('status',1)->get();
-        return view('backend.product.index', compact('products','user','categories'));
+        $products = Product::orderBy('created_at', 'DESC')->get();
+        $categories = ProductCategory::where('status', 1)->get();
+        return view('backend.product.index', compact('products', 'user', 'categories'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|unique:products',
             'price' => 'required'
         ]);
 
-        try{
+        try {
             Product::create([
                 'name' => $request->name,
                 'category_id' => $request->cat_id,
                 'price' => $request->price
             ]);
-            
+
             return back()->with('success', 'Product has been Inserted');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return back()->with('error', 'Product Not Inserted');
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $row = Product::findOrFail(decrypt($id));
         $row->delete();
         return back()->with('success', 'Product has been Deleted');

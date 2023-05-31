@@ -40,9 +40,8 @@
                                             <div class="form-group">
                                                 <label>{{ __('messages.product-name') }}
                                                     <span class="text-danger">*</span></label>
-                                                <select class="form-control" name="p_id" id="">
+                                                <select class="form-control" name="p_id" id="product_id">
                                                     <option value="">--Select Product--</option>
-
                                                 </select>
                                                 @error('p_id')
                                                     <span class="form-text text-danger">
@@ -88,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
+                                <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>{{ __('messages.product-category') }}
@@ -112,8 +111,6 @@
                                             <label>{{ __('messages.product-name') }}
                                                 <span class="text-danger">*</span></label>
                                             <select class="form-control" name="p_id" id="">
-                                                <option value="">--Select Product--</option>
-
                                             </select>
                                             @error('p_id')
                                                 <span class="form-text text-danger">
@@ -158,7 +155,7 @@
                                         <button type="button"
                                             class="mt-8 btn btn-sm btn-danger">{{ __('messages.remove') }}</button>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div id="showaddmorerow_content"></div>
                                 <button type="button" onclick="addmorerow()"
                                     class="float-right mr-30 btn btn-info btn-sm">{{ __('messages.add-more') }}</button>
@@ -178,7 +175,26 @@
     <script>
         // category wise product show on dropdown
         $('#categoryId').change(function() {
-            alert();
+            var id = $(this).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('getCategory.product') }}',
+                data: {
+                    'id': id
+                },
+                success: function(data) {
+                    $('#product_id').html(data);
+                    // console.log(data);
+                }
+            });
+
         });
 
 

@@ -50,4 +50,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/manage/stock/store', [StockController::class, 'store'])->name('stock.store');
     Route::get('/manage/stock/delete/{id}', [StockController::class, 'delete'])->name('stock.delete');
     Route::post('/manage/stock/update/{id}', [StockController::class, 'update'])->name('stock.update');
+
+    Route::post('/getCategory/product', [StockController::class, 'getCategoryProduct'])->name('getCategory.product');
 });
