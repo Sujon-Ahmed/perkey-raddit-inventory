@@ -62,4 +62,13 @@ class StockController extends Controller
         }
         echo $str_to_send;
     }
+
+    // fillter product data
+    public function fillterProduct(Request $request)
+    {
+        // $product = Product::findOrFail($request->productId);
+        return response()->json([
+            'data' => 'success'
+        ]);
+    }
 }

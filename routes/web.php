@@ -52,4 +52,5 @@ Route::prefix('admin')->group(function () {
     Route::post('/manage/stock/update/{id}', [StockController::class, 'update'])->name('stock.update');
 
     Route::post('/getCategory/product', [StockController::class, 'getCategoryProduct'])->name('getCategory.product');
+    Route::post('/fillter/product', [StockController::class, 'fillterProduct'])->name('fillter.product');
 });

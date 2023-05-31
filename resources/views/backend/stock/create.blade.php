@@ -58,7 +58,7 @@
                                                     class="form-control @error('qty')
                                                         is-invalid
                                                     @enderror"
-                                                    name="qty" placeholder="Quantity..." />
+                                                    name="qty" id="qty" placeholder="Quantity..." />
                                                 @error('qty')
                                                     <span class="form-text text-danger">
                                                         {{ $message }}
@@ -74,7 +74,8 @@
                                                     class="form-control @error('c_qty')
                                                         is-invalid
                                                     @enderror"
-                                                    name="c_qty" readonly placeholder="Current Quantity..." />
+                                                    name="c_qty" id="c_qty" readonly
+                                                    placeholder="Current Quantity..." />
                                                 @error('c_qty')
                                                     <span class="form-text text-danger">
                                                         {{ $message }}
@@ -87,6 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
@@ -159,6 +161,7 @@
                                 <div id="showaddmorerow_content"></div>
                                 <button type="button" onclick="addmorerow()"
                                     class="float-right mr-30 btn btn-info btn-sm">{{ __('messages.add-more') }}</button>
+
                             </div>
                             <button type="submit"
                                 class="btn btn-primary mt-2 justify-content-center d-flex align-items-center">{{ __('messages.save') }}</button>
@@ -173,35 +176,68 @@
 
 @section('scripts')
     <script>
-        // category wise product show on dropdown
-        $('#categoryId').change(function() {
-            var id = $(this).val();
+        $(document).ready(function() {
+            // category wise product show on dropdown
+            $('#categoryId').change(function() {
+                var id = $(this).val();
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('getCategory.product') }}',
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        $('#product_id').html(data);
+                        // console.log(data);
+                    }
+                });
+
+                $('#product_id').change(function() {
+                    var productId = $(this).val();
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: '{{ route('fillter.product') }}',
+                    //     type: 'JSON',
+                    //     data: {
+                    //         'productId': productId
+                    //     },
+                    //     success: function(data) {
+                    //         console.log(data);
+                    //     }
+                    // });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('fillter.product') }}",
+                        data: {
+                            'productId' : productId
+                        },
+                        dataType: "JSON",
+                        success: function (response) {
+
+                        }
+                    });
+                });
+
             });
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('getCategory.product') }}',
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    $('#product_id').html(data);
-                    // console.log(data);
-                }
+            // onchange qty
+            $('#qty').blur(function() {
+                var quantity = $(this).val();
+                $('#c_qty').val(quantity);
             });
 
+            function addmorerow() {
+                var numberofrow = ($('.addMoreStep .row').length - 0) + 1;
+                var html = '';
+                $('.addMoreStep').append(html);
+            }
         });
-
-
-        function addmorerow() {
-            var numberofrow = ($('.addMoreStep .row').length - 0) + 1;
-            var html = '';
-            $('.addMoreStep').append(html);
-        }
     </script>
 @endsection
